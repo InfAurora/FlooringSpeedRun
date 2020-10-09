@@ -1,13 +1,19 @@
 package com.speedrun.flooringco;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.speedrun.flooringco.controller.Controller;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
 public class FlooringcoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlooringcoApplication.class, args);
+		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+		appContext.scan("com.speedrun.flooringco");
+		appContext.refresh();
+		
+		Controller controller = appContext.getBean("controller", 
+				Controller.class);
+		controller.run();
+		appContext.close();	
 	}
 
 }

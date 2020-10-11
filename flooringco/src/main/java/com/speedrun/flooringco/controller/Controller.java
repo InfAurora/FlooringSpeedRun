@@ -6,6 +6,9 @@ import com.speedrun.flooringco.ui.View;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.speedrun.flooringco.enums.UserOption;
+import com.speedrun.flooringco.enums.UserOption.Option;
 import com.speedrun.flooringco.service.ServiceImpl;
 
 @Component
@@ -22,6 +25,35 @@ public class Controller {
     }
 
     public void run() {
-        io.print("Wow I got this set up in Vs Code!!!!");
+        Boolean runAgain = true;
+        view.displayChoices();
+        Option userOption = view.getUsersOptionChoice();
+        while(runAgain) {
+            switch (userOption) {
+                case ONE:
+                    // displayOrders();
+                    break;
+                case TWO:
+                    // addOrder();
+                    break;
+                case THREE:
+                    // editOrder();
+                    break;
+                case FOUR:
+                    // removeOrder();
+                    break;
+                case FIVE:
+                    // exportAllOrders();
+                    break;
+                case SIX:
+                     runAgain = false;
+                     // exitMessage();
+                    break;
+                default:
+                    // throw exception that says not a valid choice
+                    break;
+            }
+        }
     }
+
 }

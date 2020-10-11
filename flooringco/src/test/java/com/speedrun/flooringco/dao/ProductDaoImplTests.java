@@ -2,6 +2,10 @@ package com.speedrun.flooringco.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
+import com.speedrun.flooringco.dto.Product;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,8 +33,12 @@ public class ProductDaoImplTests {
 	}
 	
 	@Test
-	void contextLoads() {
+	void getProductInfo() throws Exception{
+        String productType = "Carpet";
+        Product productObject = dao.getProductInfo(productType);
 
-		assertTrue(5 == 5);
+        assertTrue(productObject.getProductType().equals(productType));
+        assertTrue(productObject.getCostPerSquareFoot() == new BigDecimal("2.25"));
+        assertTrue(productObject.getLaborCostPerSquareFoot() == new BigDecimal("2.10"));
 	}
 }

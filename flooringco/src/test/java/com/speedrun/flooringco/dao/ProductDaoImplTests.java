@@ -37,8 +37,8 @@ public class ProductDaoImplTests {
         String productType = "Carpet";
         Product productObject = dao.getProductInfo(productType);
 
-        assertTrue(productObject.getProductType().equals(productType));
-        assertTrue(productObject.getCostPerSquareFoot() == new BigDecimal("2.25"));
-        assertTrue(productObject.getLaborCostPerSquareFoot() == new BigDecimal("2.10"));
+        assertEquals(productObject.getProductType(), productType);
+        assertEquals(productObject.getCostPerSquareFoot(), new BigDecimal("2.25"));
+        assertEquals(productObject.getLaborCostPerSquareFoot(), new BigDecimal("2.10"));
 	}
 }

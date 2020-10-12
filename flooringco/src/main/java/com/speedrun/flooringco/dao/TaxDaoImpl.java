@@ -1,5 +1,8 @@
 package com.speedrun.flooringco.dao;
 
-public class TaxDaoImpl {
+import org.springframework.stereotype.Component;
+
+@Component
+public class TaxDaoImpl implements TaxDao{
     
 }

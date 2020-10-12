@@ -3,11 +3,8 @@ package com.speedrun.flooringco.controller;
 import com.speedrun.flooringco.ui.UserConsole;
 import com.speedrun.flooringco.ui.UserConsoleImpl;
 import com.speedrun.flooringco.ui.View;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.speedrun.flooringco.enums.UserOption;
 import com.speedrun.flooringco.enums.UserOption.Option;
 import com.speedrun.flooringco.service.ServiceImpl;
 
@@ -16,7 +13,6 @@ public class Controller {
     
     private ServiceImpl service;
     private View view;
-    private UserConsole io = new UserConsoleImpl();
 
     @Autowired
     public Controller(ServiceImpl service, View view) {
@@ -27,10 +23,12 @@ public class Controller {
     public void run() {
         Boolean runAgain = true;
         view.displayChoices();
-        Option userOption = view.getUsersOptionChoice();
+        Option userOption = null;
         while(runAgain) {
+            userOption = view.getUsersOptionChoice();
             switch (userOption) {
                 case ONE:
+                System.out.println("hello");
                     // displayOrders();
                     break;
                 case TWO:

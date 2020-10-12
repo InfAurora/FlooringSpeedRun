@@ -32,7 +32,7 @@ public class TaxDaoImplTests {
 	
 	@Test
 	void getTaxInfo() {
-        String stateAbbreviation = "TX"; 
+        // String stateAbbreviation = "TX"; 
         // Tax taxObject = dao.getTaxInfo(stateAbbreviation);
         // assertTrue(taxObject.getStateAbbreviation().equals(stateAbbreviation));
         // assertTrue(taxObject.getStateName().equals("Texas"));

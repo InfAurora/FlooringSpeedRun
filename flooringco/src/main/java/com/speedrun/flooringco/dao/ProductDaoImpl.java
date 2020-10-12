@@ -9,16 +9,20 @@ import java.util.Scanner;
 
 import com.speedrun.flooringco.dto.Product;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProductDaoImpl implements ProductDao {
 
-    final private String DELIMITER = "::";
+    final private String DELIMITER = ",";
     final private String FILE = "Products.txt";
     private Map<String, Product> productMap = new HashMap<>();
 
     @Override
     public Product getProductInfo(String productType) throws FlooringPersistanceException{
         loadProduct();
-        return null;
+        Product product = productMap.get(productType);
+        return product;
     }
     
     private Product unmarshallProduct(String lineInFile) {
@@ -38,10 +42,11 @@ public class ProductDaoImpl implements ProductDao {
         } catch (FileNotFoundException e) {
             throw new FlooringPersistanceException("Taxes file not found!!!");
         }
+        sc.nextLine();
         while(sc.hasNextLine()) {
             String currentLine = sc.nextLine();
             Product unmarshalledProduct = unmarshallProduct(currentLine);
-            String productType = unmarshalledProduct.getProductType()
+            String productType = unmarshalledProduct.getProductType();
             productMap.put(productType, unmarshalledProduct);
         }
         sc.close();

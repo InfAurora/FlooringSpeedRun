@@ -3,11 +3,13 @@ package com.speedrun.flooringco.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+
 import com.speedrun.flooringco.dao.OrderDao;
 import com.speedrun.flooringco.dao.ProductDao;
 import com.speedrun.flooringco.dao.TaxDao;
 import com.speedrun.flooringco.dto.Product;
 import com.speedrun.flooringco.dto.Tax;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -65,36 +67,37 @@ public class ServiceImplTests {
     //     Tax tax = taxDao.getTaxInfo(stateAbbreviation);
     //     return tax;
     // }
-
+    
     @Test
-    BigDecimal getTotalMaterialCost() {
+    void getTotalMaterialCost() {
         BigDecimal totalMaterialCost = service.getTotalMaterialCost(product, area);
         
         assertEquals(totalMaterialCost, new BigDecimal("0"));
-        return totalMaterialCost;
     }
 
     @Test
-    BigDecimal getTotalLaborCost() {
+    void getTotalLaborCost() {
         BigDecimal totalLaborCost = service.getTotalLaborCost(product, area);
 
         assertEquals(totalLaborCost, new BigDecimal("0"));
-        return totalLaborCost;
     }
 
     @Test
-    BigDecimal getTotalTax() {
-        BigDecimal totalTax = service.getTotalTax(tax, getTotalMaterialCost(), getTotalLaborCost());
+    void getTotalTax() {
+        BigDecimal totalMaterialCost = service.getTotalMaterialCost(product, area);
+        BigDecimal totalLaborCost = service.getTotalLaborCost(product, area);
+        BigDecimal totalTax = service.getTotalTax(tax, totalMaterialCost, totalLaborCost);
         
         assertEquals(totalTax, new BigDecimal("0"));
-        return totalTax;
     }
 
     @Test
-    BigDecimal getTotal() {        
-        BigDecimal total = service.getTotal(getTotalTax(), getTotalMaterialCost(), getTotalLaborCost());
+    void getTotal() { 
+        BigDecimal totalMaterialCost = service.getTotalMaterialCost(product, area);
+        BigDecimal totalLaborCost = service.getTotalLaborCost(product, area);       
+        BigDecimal totalTax = service.getTotalTax(tax, totalMaterialCost, totalLaborCost);
+        BigDecimal total = service.getTotal(totalLaborCost, totalMaterialCost, totalTax);
 
         assertEquals(total, new BigDecimal("0"));
-        return total;
     }
 }

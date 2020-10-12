@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ProductDaoImplTests {
+public class ProductDaoImplTest {
     
     ProductDaoImpl dao = new ProductDaoImpl();
 
@@ -36,7 +36,6 @@ public class ProductDaoImplTests {
 	void getProductInfo() throws Exception{
         String productType = "Carpet";
         Product productObject = dao.getProductInfo(productType);
-
         assertEquals(productObject.getProductType(), productType);
         assertEquals(productObject.getCostPerSquareFoot(), new BigDecimal("2.25"));
         assertEquals(productObject.getLaborCostPerSquareFoot(), new BigDecimal("2.10"));

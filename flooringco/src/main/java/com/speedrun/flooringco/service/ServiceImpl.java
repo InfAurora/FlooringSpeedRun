@@ -49,7 +49,7 @@ public class ServiceImpl {
 
     public BigDecimal getTotalTax(Tax taxRate, BigDecimal totalMaterialCost,  BigDecimal totalLaborCost) {
         BigDecimal totalTax = (totalMaterialCost.add(totalLaborCost)).multiply(taxRate.getTaxRate()
-            .divide(new BigDecimal("100")).setScale(2, RoundingMode.HALF_UP));
+            .divide(new BigDecimal("100"))).setScale(2, RoundingMode.HALF_UP);
         return totalTax;
     }
 

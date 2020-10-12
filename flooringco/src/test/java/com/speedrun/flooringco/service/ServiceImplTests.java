@@ -2,10 +2,12 @@ package com.speedrun.flooringco.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import com.speedrun.flooringco.dao.OrderDao;
 import com.speedrun.flooringco.dao.ProductDao;
 import com.speedrun.flooringco.dao.TaxDao;
-
+import com.speedrun.flooringco.dto.Product;
+import com.speedrun.flooringco.dto.Tax;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +20,10 @@ public class ServiceImplTests {
     private TaxDao taxDao;
     private ProductDao productDao;
 
-    ServiceImpl service = new ServiceImpl(orderDao, taxDao, productDao);
+    private ServiceImpl service = new ServiceImpl(orderDao, taxDao, productDao);
+    private Product product;
+    private Tax tax;
+    private BigDecimal area;
 
     @BeforeAll
     static void initAll() {
@@ -26,6 +31,17 @@ public class ServiceImplTests {
 
     @BeforeEach
     void init() {
+        product = new Product();
+        product.setProductType("Carpet");
+        product.setCostPerSquareFoot(new BigDecimal("2.25"));
+        product.setLaborCostPerSquareFoot(new BigDecimal("2.10"));
+
+        tax = new Tax();
+        tax.setStateAbbreviation("TX");
+        tax.setStateName("Texas");
+        tax.setTaxRate(new BigDecimal("4.45"));
+
+        area = new BigDecimal("100");
     }
 	
 	@AfterEach
@@ -35,10 +51,50 @@ public class ServiceImplTests {
     @AfterAll
     static void tearDownAll() {
 	}
-	
-	@Test
-	void contextLoads() {
+    
+    // pass through method, redundant test
+    // @Test
+    // void getProductInfo(String productType) throws FlooringPersistanceException{
+    //     Product product = productDao.getProductInfo(productType);
+    //     return product;
+    // }
 
-		assertTrue(5 == 5);
-	}
+    // pass through method, redundant test
+    // @Test
+    // void getTaxInfo(String stateAbbreviation) throws FlooringPersistanceException {
+    //     Tax tax = taxDao.getTaxInfo(stateAbbreviation);
+    //     return tax;
+    // }
+
+    @Test
+    BigDecimal getTotalMaterialCost() {
+        BigDecimal totalMaterialCost = service.getTotalMaterialCost(product, area);
+        
+        assertEquals(totalMaterialCost, new BigDecimal("0"));
+        return totalMaterialCost;
+    }
+
+    @Test
+    BigDecimal getTotalLaborCost() {
+        BigDecimal totalLaborCost = service.getTotalLaborCost(product, area);
+
+        assertEquals(totalLaborCost, new BigDecimal("0"));
+        return totalLaborCost;
+    }
+
+    @Test
+    BigDecimal getTotalTax() {
+        BigDecimal totalTax = service.getTotalTax(tax, getTotalMaterialCost(), getTotalLaborCost());
+        
+        assertEquals(totalTax, new BigDecimal("0"));
+        return totalTax;
+    }
+
+    @Test
+    BigDecimal getTotal() {        
+        BigDecimal total = service.getTotal(getTotalTax(), getTotalMaterialCost(), getTotalLaborCost());
+
+        assertEquals(total, new BigDecimal("0"));
+        return total;
+    }
 }

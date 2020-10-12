@@ -1,7 +1,5 @@
 package com.speedrun.flooringco.controller;
 
-import com.speedrun.flooringco.ui.UserConsole;
-import com.speedrun.flooringco.ui.UserConsoleImpl;
 import com.speedrun.flooringco.ui.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

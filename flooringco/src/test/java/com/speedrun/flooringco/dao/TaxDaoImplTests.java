@@ -2,6 +2,8 @@ package com.speedrun.flooringco.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
 import com.speedrun.flooringco.dto.Tax;
 
 import org.junit.jupiter.api.AfterAll;
@@ -31,11 +33,11 @@ public class TaxDaoImplTests {
 	}
 	
 	@Test
-	void getTaxInfo() {
-        // String stateAbbreviation = "TX"; 
-        // Tax taxObject = dao.getTaxInfo(stateAbbreviation);
-        // assertTrue(taxObject.getStateAbbreviation().equals(stateAbbreviation));
-        // assertTrue(taxObject.getStateName().equals("Texas"));
-        // assertTrue(taxObject.getTaxRate().equals("4.45"));
+	void getTaxInfo() throws Exception{
+        String stateAbbreviation = "TX"; 
+        Tax taxObject = dao.getTaxInfo(stateAbbreviation);
+        assertEquals(taxObject.getStateAbbreviation(), (stateAbbreviation));
+        assertEquals(taxObject.getStateName(), ("Texas"));
+        assertEquals(taxObject.getTaxRate(), new BigDecimal("4.45"));
 	}
 }
